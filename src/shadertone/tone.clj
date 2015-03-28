@@ -119,11 +119,11 @@
       (GL11/glBindTexture GL11/GL_TEXTURE_2D 0))
     :pre-draw ;; grab the data and put it in the texture for drawing.
     (do
-      (if (buffer-live? wave-buf) ;; FIXME? assume fft-buf is live
-        (-> fftwave-float-buf
-            (.put (buffer-data fft-buf))
-            (.put (buffer-data wave-buf))
-            (.flip)))
+      ;; (if (buffer-live? wave-buf) ;; FIXME? assume fft-buf is live
+      ;;   (-> fftwave-float-buf
+      ;;       (.put (buffer-read fft-buf))
+      ;;       (.put (buffer-read wave-buf))
+      ;;       (.flip)))
       (GL13/glActiveTexture (+ GL13/GL_TEXTURE0 @fftwave-tex-num))
       (GL11/glBindTexture GL11/GL_TEXTURE_2D @fftwave-tex-id)
       (GL11/glTexImage2D GL11/GL_TEXTURE_2D 0 ARBTextureRg/GL_R32F
